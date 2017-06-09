@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{889ED6E9-6222-472A-BEFA-614D26EA92A0}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FUJI.SyncFeed2.Servicio</RootNamespace>
+    <AssemblyName>FUJI.SyncFeed2.Servicio</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="databaseLocal\NapoleonAUX.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NapoleonAUX.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="databaseLocal\NapoleonAUX.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NapoleonAUX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="databaseLocal\NapoleonAUX.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NapoleonAUX.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="databaseLocal\tbl_CAT_EstatusAUX.cs">
+      <DependentUpon>NapoleonAUX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="databaseLocal\tbl_CAT_ModalidadAUX.cs">
+      <DependentUpon>NapoleonAUX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="databaseLocal\tbl_ConfigSitioAUX.cs">
+      <DependentUpon>NapoleonAUX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="databaseLocal\tbl_DET_EstudioAUX.cs">
+      <DependentUpon>NapoleonAUX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="databaseLocal\tbl_MST_EstudioAUX.cs">
+      <DependentUpon>NapoleonAUX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="database\NapoleonDBServer.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NapoleonDBServer.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="database\NapoleonDBServer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NapoleonDBServer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="database\NapoleonDBServer.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NapoleonDBServer.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="database\NapoleonServerDataAccess.cs" />
+    <Compile Include="database\tbl_ConfigSitio.cs">
+      <DependentUpon>NapoleonDBServer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="database\tbl_DET_Estudio.cs">
+      <DependentUpon>NapoleonDBServer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="database\tbl_DET_ServicioSitio.cs">
+      <DependentUpon>NapoleonDBServer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="database\tbl_MST_Estudio.cs">
+      <DependentUpon>NapoleonDBServer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\clsConfiguracion.cs" />
+    <Compile Include="Entidades\clsEstudio.cs" />
+    <Compile Include="Extensions\Log.cs" />
+    <Compile Include="databaseLocal\NapoleonAUXDataAccess.cs" />
+    <Compile Include="Extensions\XMLConfigurator.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="ProjectInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ProjectInstaller.Designer.cs">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SyncFeed2Service.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SyncFeed2Service.Designer.cs">
+      <DependentUpon>SyncFeed2Service.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="databaseLocal\NapoleonAUX.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NapoleonAUX.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="databaseLocal\NapoleonAUX.edmx.diagram">
+      <DependentUpon>NapoleonAUX.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="database\NapoleonDBServer.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NapoleonDBServer.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="database\NapoleonDBServer.edmx.diagram">
+      <DependentUpon>NapoleonDBServer.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="databaseLocal\NapoleonAUX.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NapoleonAUX.edmx</DependentUpon>
+      <LastGenOutput>NapoleonAUX.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="databaseLocal\NapoleonAUX.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NapoleonAUX.edmx</DependentUpon>
+      <LastGenOutput>NapoleonAUX.cs</LastGenOutput>
+    </Content>
+    <Content Include="database\NapoleonDBServer.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NapoleonDBServer.edmx</DependentUpon>
+      <LastGenOutput>NapoleonDBServer.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="database\NapoleonDBServer.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NapoleonDBServer.edmx</DependentUpon>
+      <LastGenOutput>NapoleonDBServer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ProjectInstaller.resx">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f29fb09eecc3460db29dc5154dc2763f" Name="Diagram1">
+        <EntityTypeShape EntityType="NAPOLEONModel.tbl_DET_Estudio" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAPOLEONModel.tbl_MST_Estudio" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="NAPOLEONModel.FK_MST_Estudio_DET_Estudio" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="NAPOLEONModel.tbl_DET_ServicioSitio" Width="1.5" PointX="3.375" PointY="4.75" />
+        <EntityTypeShape EntityType="NAPOLEONModel.tbl_ConfigSitio" Width="1.5" PointX="8.25" PointY="2.75" />
+        <AssociationConnector Association="NAPOLEONModel.FK_ConfigSitio_DET_ServicioSitio" />
+        <AssociationConnector Association="NAPOLEONModel.FK_ConfigSitio_MST_Estudio" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

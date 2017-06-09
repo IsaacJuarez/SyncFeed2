@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FUJI.SyncFeed2.Servicio", "FUJI.SyncFeed2.Servicio\FUJI.SyncFeed2.Servicio.csproj", "{889ED6E9-6222-472A-BEFA-614D26EA92A0}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupSyncFeed2", "SetupSyncFeed2\SetupSyncFeed2.vdproj", "{EEC2B77A-0584-472C-A6E9-5BADE16E33AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{889ED6E9-6222-472A-BEFA-614D26EA92A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{889ED6E9-6222-472A-BEFA-614D26EA92A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{889ED6E9-6222-472A-BEFA-614D26EA92A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{889ED6E9-6222-472A-BEFA-614D26EA92A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEC2B77A-0584-472C-A6E9-5BADE16E33AD}.Debug|Any CPU.ActiveCfg = Debug
+		{EEC2B77A-0584-472C-A6E9-5BADE16E33AD}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
