@@ -1,4 +1,5 @@
-﻿using FUJI.SyncFeed2.Servicio.Entidades;
+﻿//using FUJI.SyncFeed2.Servicio.Entidades;
+using FUJI.SyncFeed2.Servicio.Feed2Service;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -22,6 +23,7 @@ namespace FUJI.SyncFeed2.Servicio.Extensions
 
                 XmlNode node = doc.DocumentElement.SelectSingleNode("/Configuraciones/sitio");
                 //Sitio
+                _config.id_Sitio = node["id_Sitio"]?.InnerText != "" ? Convert.ToInt32(node["id_Sitio"]?.InnerText) : 0;
                 _config.vchClaveSitio = node["claveSitio"]?.InnerText;
                 _config.vchNombreSitio = node["NombreSitio"]?.InnerText;
                 _config.vchAETitle = node["AETitle"]?.InnerText;

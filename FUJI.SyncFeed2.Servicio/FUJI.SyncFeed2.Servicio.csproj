@@ -43,10 +43,13 @@
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -85,38 +88,12 @@
     <Compile Include="databaseLocal\tbl_MST_EstudioAUX.cs">
       <DependentUpon>NapoleonAUX.tt</DependentUpon>
     </Compile>
-    <Compile Include="database\NapoleonDBServer.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NapoleonDBServer.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="database\NapoleonDBServer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NapoleonDBServer.tt</DependentUpon>
-    </Compile>
-    <Compile Include="database\NapoleonDBServer.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NapoleonDBServer.edmx</DependentUpon>
-    </Compile>
     <Compile Include="database\NapoleonServerDataAccess.cs" />
-    <Compile Include="database\tbl_ConfigSitio.cs">
-      <DependentUpon>NapoleonDBServer.tt</DependentUpon>
-    </Compile>
-    <Compile Include="database\tbl_DET_Estudio.cs">
-      <DependentUpon>NapoleonDBServer.tt</DependentUpon>
-    </Compile>
-    <Compile Include="database\tbl_DET_ServicioSitio.cs">
-      <DependentUpon>NapoleonDBServer.tt</DependentUpon>
-    </Compile>
-    <Compile Include="database\tbl_MST_Estudio.cs">
-      <DependentUpon>NapoleonDBServer.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entidades\clsConfiguracion.cs" />
     <Compile Include="Entidades\clsEstudio.cs" />
     <Compile Include="Extensions\Log.cs" />
     <Compile Include="databaseLocal\NapoleonAUXDataAccess.cs" />
+    <Compile Include="Extensions\Security.cs" />
     <Compile Include="Extensions\XMLConfigurator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectInstaller.cs">
@@ -126,6 +103,16 @@
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Feed2Service\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="SyncFeed2Service.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -134,7 +121,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="databaseLocal\NapoleonAUX.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>NapoleonAUX.Designer.cs</LastGenOutput>
@@ -142,14 +131,78 @@
     <None Include="databaseLocal\NapoleonAUX.edmx.diagram">
       <DependentUpon>NapoleonAUX.edmx</DependentUpon>
     </None>
-    <EntityDeploy Include="database\NapoleonDBServer.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>NapoleonDBServer.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="database\NapoleonDBServer.edmx.diagram">
-      <DependentUpon>NapoleonDBServer.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Feed2Service\FUJI.SyncFeed2.Servicio.Feed2Service.ClienteF2CResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Feed2Service\FUJI.SyncFeed2.Servicio.Feed2Service.clsDashboardService.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Feed2Service\FUJI.SyncFeed2.Servicio.Feed2Service.clsEntidadTabla.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Feed2Service\FUJI.SyncFeed2.Servicio.Feed2Service.clsGrafica.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Feed2Service\FUJI.SyncFeed2.Servicio.Feed2Service.clsMensaje.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Feed2Service\FUJI.SyncFeed2.Servicio.Feed2Service.clsModeloCatalogo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Feed2Service\FUJI.SyncFeed2.Servicio.Feed2Service.clsTop.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Feed2Service\FUJI.SyncFeed2.Servicio.Feed2Service.clsUsuario.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Feed2Service\FUJI.SyncFeed2.Servicio.Feed2Service.EstudioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Feed2Service\FUJI.SyncFeed2.Servicio.Feed2Service.LoginResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Feed2Service\FUJI.SyncFeed2.Servicio.Feed2Service.PrioridadResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Feed2Service\FUJI.SyncFeed2.Servicio.Feed2Service.ProyectoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Feed2Service\FUJI.SyncFeed2.Servicio.Feed2Service.tbl_CAT_Proyecto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Feed2Service\FUJI.SyncFeed2.Servicio.Feed2Service.tbl_CAT_TipoUsuario.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Feed2Service\FUJI.SyncFeed2.Servicio.Feed2Service.tbl_ConfigSitio.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Feed2Service\FUJI.SyncFeed2.Servicio.Feed2Service.tbl_RegistroSitio.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Feed2Service\FUJI.SyncFeed2.Servicio.Feed2Service.tbl_REL_ProyectoSitio.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Feed2Service\NapoleonService.wsdl" />
+    <None Include="Service References\Feed2Service\NapoleonService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Feed2Service\NapoleonService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Feed2Service\NapoleonService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Feed2Service\NapoleonService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Feed2Service\NapoleonService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="databaseLocal\NapoleonAUX.Context.tt">
@@ -162,16 +215,13 @@
       <DependentUpon>NapoleonAUX.edmx</DependentUpon>
       <LastGenOutput>NapoleonAUX.cs</LastGenOutput>
     </Content>
-    <Content Include="database\NapoleonDBServer.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NapoleonDBServer.edmx</DependentUpon>
-      <LastGenOutput>NapoleonDBServer.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="database\NapoleonDBServer.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NapoleonDBServer.edmx</DependentUpon>
-      <LastGenOutput>NapoleonDBServer.cs</LastGenOutput>
-    </Content>
+    <None Include="Service References\Feed2Service\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Feed2Service\configuration.svcinfo" />
+    <None Include="Service References\Feed2Service\configuration91.svcinfo" />
+    <None Include="Service References\Feed2Service\NapoleonService.disco" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -180,6 +230,12 @@
     <EmbeddedResource Include="ProjectInstaller.resx">
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Feed2Service\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

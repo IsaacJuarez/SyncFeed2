@@ -1,9 +1,11 @@
 ﻿using FUJI.SyncFeed2.Servicio.database;
 using FUJI.SyncFeed2.Servicio.Entidades;
 using FUJI.SyncFeed2.Servicio.Extensions;
+using FUJI.SyncFeed2.Servicio.Feed2Service;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.ServiceProcess;
 using System.Timers;
 
@@ -14,11 +16,34 @@ namespace FUJI.SyncFeed2.Servicio
         private Timer SyncTimer = new Timer();
         private NapoleonAUXDataAccess NapAuxDA = new NapoleonAUXDataAccess();
         private NapoleonServerDataAccess NapSerDA = new NapoleonServerDataAccess();
-        
+        public static int id_Servicio = 0;
+        public static string vchClaveSitio = "";
+        public static string AETitle = "";
+        public static string vchPathRep = "";
+        public static string path = "";
+        public static Feed2Service.clsConfiguracion _conf;
+
         public SyncFeed2Service()
         {
             try
             {
+                try
+                {
+                    path = ConfigurationManager.AppSettings["ConfigDirectory"] != null ? ConfigurationManager.AppSettings["ConfigDirectory"].ToString() : "";
+                }
+                catch (Exception ePath)
+                {
+                    path = "";
+                    Log.EscribeLog("Error al obtener el path desde appSettings: " + ePath.Message);
+                }
+                if (File.Exists(path + "info.xml"))
+                {
+                    _conf = XMLConfigurator.getXMLfile();
+                    id_Servicio = _conf.id_Sitio;
+                    AETitle = _conf.vchAETitle;
+                    vchPathRep = _conf.vchPathLocal;
+                    vchClaveSitio = _conf.vchClaveSitio;
+                }
                 cargaServicio();
             }
             catch (Exception eSync)
@@ -34,15 +59,24 @@ namespace FUJI.SyncFeed2.Servicio
             {
                 Console.WriteLine("Se cargó correctamente el servicio SyncFeed2Service. " + "[" + DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString() + "]");
                 Log.EscribeLog("Se cargó correctamente el servicio SyncFeed2Service. ");
-                int minutosPoleo = ConfigurationManager.AppSettings["minutosPoleo"] != null ? Convert.ToInt32(ConfigurationManager.AppSettings["minutosPoleo"].ToString()) : 1;
-                int minutos = 1000 * 60 * minutosPoleo;
+                int segundosPoleo;
+                try
+                {
+                    segundosPoleo = ConfigurationManager.AppSettings["segundosPoleo"] != null ? Convert.ToInt32(ConfigurationManager.AppSettings["segundosPoleo"].ToString()) : 1;
+                }
+                catch(Exception eGPOLeo)
+                {
+                    Log.EscribeLog("Existe un error al obtener el tiempo para el poleo del servicio: " + eGPOLeo.Message);
+                    segundosPoleo = 60;
+                }
+                int minutos = (int)(1000 * segundosPoleo);
                 SyncTimer.Elapsed += new System.Timers.ElapsedEventHandler(SyncTimer_Elapsed);
                 SyncTimer.Interval = minutos;
                 SyncTimer.Enabled = true;
                 SyncTimer.Start();
                 try
                 {
-                    NapSerDA.setService();
+                    NapSerDA.setService(id_Servicio,vchClaveSitio);
                 }
                 catch(Exception e)
                 {
@@ -63,25 +97,46 @@ namespace FUJI.SyncFeed2.Servicio
                 Console.WriteLine("[" + DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString() + "] Leyendo estudios para sincronizar.");
                 try
                 {
-                    NapSerDA.setService();
+                    NapSerDA.setService(id_Servicio,vchClaveSitio);
                 }
                 catch (Exception eSyc)
                 {
                     Log.EscribeLog("Existe un error en setService: " + eSyc.Message);
                 }
-                List<clsEstudio> lstEstudio = new List<clsEstudio>();
+                List<Entidades.clsEstudio> lstEstudio = new List<Entidades.clsEstudio>();
                 lstEstudio = NapAuxDA.getEstudiosPendientes();
                 if(lstEstudio != null)
                 {
-                    if(lstEstudio.Count > 0)
+                    if (lstEstudio.Count > 0)
                     {
-                        foreach(clsEstudio item in lstEstudio)
+                        foreach (Entidades.clsEstudio item in lstEstudio)
                         {
-                            bool valido = false;
-                            valido = NapSerDA.setEstudioServer(item);
-                            if (valido)
+                            Feed2Service.clsEstudio mdl = new Feed2Service.clsEstudio();
+                            mdl.vchClaveSitio = vchClaveSitio;
+                            mdl.intDetEstudioID = item.intDetEstudioID;
+                            mdl.intEstudioID = item.intEstatusID;
+                            mdl.intEstatusID = item.intEstatusID;
+                            mdl.vchNameFile = item.vchNameFile;
+                            mdl.intSizeFile = item.intSizeFile;
+                            mdl.vchPathFile = item.vchPathFile;
+                            mdl.vchStudyInstanceUID = item.vchStudyInstanceUID;
+                            mdl.datFecha = item.datFecha;
+                            mdl.id_Sitio = item.id_Sitio;
+                            mdl.intModalidad = item.intModalidadID;
+                            mdl.vchAccessionNumber = item.vchAccessionNumber;
+                            mdl.vchPatientBirthDate = item.vchPatientBirthDate;
+                            mdl.PatientID = item.PatientID;
+                            mdl.PatientName = item.PatientName;
+                            mdl.vchgenero = item.vchgenero;
+                            mdl.vchEdad = item.vchEdad;
+                            ClienteF2CResponse mdlResponse = new ClienteF2CResponse();
+                            mdlResponse = NapSerDA.setEstudioServer(mdl);
+                            if (mdlResponse != null)
                             {
-                                NapAuxDA.updateEstudioSync(item.intDetEstudioID);
+                                if (mdlResponse.valido)
+                                {
+                                    NapAuxDA.updateEstudioSync(item.intDetEstudioID);
+                                }
                             }
                         }
                     }
