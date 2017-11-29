@@ -93,8 +93,8 @@ namespace FUJI.SyncFeed2.Servicio
         {
             try
             {
-                Log.EscribeLog("[" + DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString() + "] Leyendo estudios para sincronizar.");
-                Console.WriteLine("[" + DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString() + "] Leyendo estudios para sincronizar.");
+                //Log.EscribeLog("[" + DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString() + "] Leyendo estudios para sincronizar.");
+                //Console.WriteLine("[" + DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString() + "] Leyendo estudios para sincronizar.");
                 try
                 {
                     NapSerDA.setService(id_Servicio,vchClaveSitio);
